@@ -1,9 +1,9 @@
 
 <template>
   <div class="calculator">
-    <div class="display">0.0523459</div>
-    <div class="btn">C</div>
-    <div class="btn">+/-</div>
+    <div class="display">{{current || '0'}}</div>
+    <div @click="clear" class="btn">C</div>
+    <div @click="sign" class="btn">+/-</div>
     <div class="btn">%</div>
     <div class="btn operator">÷</div>
     <div class="btn">7</div>
@@ -25,7 +25,22 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data(){
+    return {
+      current: "12e",
+    }
+  },
+  methods: {
+    clear() {
+      this.current = "";
+    },
+    sign() {
+      this.current = this.current.charAt(0) === '-' ?
+        this.current.slice(1) : `-${this.current}`;
+    }
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
