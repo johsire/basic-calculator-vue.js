@@ -20,20 +20,23 @@
     <div @click="add" class="btn operator">+</div>
     <div @click="append('0')" class= "btn zero">0</div>
     <div @click="dot" class="btn">.</div>
-    <div class="btn operator">=</div>
+    <div @click="equal" class="btn operator">=</div>
   </div>
 </template>
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      current: "",
+      previous: null,
+      current: '',
+      operator: null,
+      operatorClicked: false,
     }
   },
   methods: {
     clear() {
-      this.current = "";
+      this.current = '';
     },
     sign() {
       this.current = this.current.charAt(0) === '-' ?
@@ -50,10 +53,28 @@ export default {
         this.append('.');
       }
     },
-    divide() {},
-    times() {},
-    subtract() {},
-    add() {},
+    divide() {
+      this.operator = (a, b) => a / b;
+      this.previous = current;
+      this.operatorClicked = true;
+    },
+    times() {
+      this.operator = (a, b) => a * b;
+      this.previous = current;
+      this.operatorClicked = true;
+    },
+    subtract() {
+      this.operator = (a, b) => a - b;
+      this.previous = current;
+      this.operatorClicked = true;
+    },
+    add() {
+      this.operator = (a, b) => a + b;
+      this.previous = current;
+      this.operatorClicked = true;
+    },
+    equal() {
+    }
   }
 }
 </script>
