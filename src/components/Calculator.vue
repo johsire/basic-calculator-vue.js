@@ -46,6 +46,10 @@ export default {
       this.current = `${parseFloat(this.current) / 100}`
     },
     append (number) {
+      if (this.operatorClicked) {
+        this.current = '';
+        this.operatorClicked = false;
+      }
       this.current = `${this.current}${number}`;
     },
     dot () {
@@ -74,6 +78,11 @@ export default {
       this.setPrevious();
     },
     equal () {
+      this.current = `${this.operator(
+        parseFloat(this.previous),
+        parseFloat(this.current)
+        )}`;
+        this.previous = null;
     }
   }
 }
